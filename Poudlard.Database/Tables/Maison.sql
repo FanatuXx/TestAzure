@@ -1,0 +1,11 @@
+﻿CREATE TABLE [dbo].[Maison]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL 
+		CONSTRAINT DF_Maison_Id DEFAULT (NEWID()), 
+    [Nom] NVARCHAR(30) NOT NULL, 
+    [Fondateur] NVARCHAR(75) NOT NULL, 
+    [Couleur] NVARCHAR(50) NOT NULL, 
+    [Embleme] NVARCHAR(50) NOT NULL, 
+    CONSTRAINT [PK_Maison] PRIMARY KEY ([Id]),
+
+)

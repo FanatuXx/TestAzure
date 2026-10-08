@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/01 Database/">
+    <Project Path="Poudlard.Database/Poudlard.Database.sqlproj" Id="713ae3ee-2c94-4cbb-8697-4178cd6a2f00">
+      <Build />
+      <Deploy />
+    </Project>
+  </Folder>
+  <Folder Name="/02 Domain/">
+    <Project Path="Poudlard.Api.Domain/Poudlard.Api.Domain.csproj" Id="3bd3767c-3400-43f7-bdd3-45a7b4213046" />
+  </Folder>
+  <Folder Name="/03 Api/">
+    <Project Path="Poudlard.Api/Poudlard.Api.csproj" />
+  </Folder>
+  <Folder Name="/99 Tools/">
+    <Project Path="Tools/Tools.csproj" Id="8e835916-adbe-4b28-8f59-7d44972d58be" />
+  </Folder>
+</Solution>
