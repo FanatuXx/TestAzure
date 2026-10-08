@@ -1,0 +1,64 @@
+﻿@page "/dino/create"
+
+<h3>CreateDinoForm</h3>
+
+<EditForm EditContext="_context" OnValidSubmit="Create">
+    <DataAnnotationsValidator />
+    <ValidationSummary Model="_form" />
+    <div>
+        <label>Espece : </label>
+        <InputText @bind-Value="_form.Espece" />
+        <ValidationMessage For="() => _form.Espece" />
+    </div>
+    <div>
+        <label>Poids : </label>
+        <InputNumber @bind-Value="_form.Poids" />
+        <ValidationMessage For="() => _form.Poids" />
+    </div>
+    <div>
+        <label>Taille : </label>
+        <InputNumber @bind-Value="_form.Taille" />
+        <ValidationMessage For="() => _form.Taille" />
+    </div>
+
+    <input type="submit" value="Create" />
+</EditForm>
+
+@code {
+    private EditContext? _context;
+    private CreateDinoForm _form = new ();
+
+    protected override void OnInitialized()
+    {
+        _context = new EditContext(_form);
+        ValidationMessageStore messageStore = new ValidationMessageStore(_context);
+        _context.OnFieldChanged += (sender, eventArgs) => Validate((EditContext)_context, messageStore, eventArgs.FieldIdentifier);
+    }
+
+    private void Validate(EditContext context, ValidationMessageStore messageStore, FieldIdentifier fieldIdentifier)
+    {
+        messageStore.Clear();
+
+        if(_form.Poids is 42)
+        {
+            messageStore.Add(context.Field("Poids"), "Le poids ne peut pas être 42!!");
+            context.NotifyValidationStateChanged();
+        }
+    }
+
+    private void Create()
+    {
+        Console.WriteLine(JsonSerializer.Serialize(_form));
+    }
+
+    private class CreateDinoForm
+    {
+        [Required(ErrorMessage = "Hey l'efle t'es con? le champs est obligatoire!! signé le nain")]
+        [StringLength(128, MinimumLength = 1)]
+        public string Espece { get; set; } = string.Empty;
+        [Range(1, int.MaxValue)]
+        public int Poids { get; set; }
+        [Range(1, int.MaxValue)]
+        public int Taille { get; set; }
+    }
+}

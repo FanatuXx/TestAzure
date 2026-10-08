@@ -1,0 +1,56 @@
+﻿@page "/contacts"
+
+<PageTitle>Contacts</PageTitle>
+
+<h3>Contacts</h3>
+
+@if(_items is null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <div>
+        @foreach (Personne p in _items)
+        {
+            <ShowPersonne Personne="@p" OnPersonneSelect="OnPersonneSelect" />
+        }
+    </div>
+
+    @if(_selectedItem is not null)
+    {
+        <div>
+            <fieldset>
+                <legend>Details</legend>
+                <p>Id : @_selectedItem.Id</p>
+                <p>Nom : @_selectedItem.Nom</p>
+                <p>Prénom : @_selectedItem.Prenom</p>
+                <p>Email : @_selectedItem.Email</p>
+                <p>Telephone : @_selectedItem.Tel</p>
+            </fieldset>
+        </div>
+    }
+}
+
+@code {
+    private List<Personne>? _items;
+
+    private Personne? _selectedItem = null;
+
+    private void OnPersonneSelect(Personne p)
+    {
+        _selectedItem = p;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000);
+
+        _items = new()
+        {
+            new Personne(1, "Doe", "John", "john.doe@test.be", "555-639654"),
+            new Personne(2, "Doe", "Jane", "jane.doe@test.be", "555-636854"),
+            new Personne(3, "Smith", "Hannibal", "hannibal@test.be", "555-639654"),
+        };
+    }
+}

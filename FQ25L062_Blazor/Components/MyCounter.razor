@@ -1,0 +1,25 @@
+﻿<h3>MyCounter</h3>
+
+<button @onclick="Increment" class="btn btn-dark">Value : @($"{_count:D3}")</button>
+
+@if(_items.Count > 0)
+{
+    <ul>
+        @foreach(int item in _items)
+        {
+            <li>@item</li>
+        }
+    </ul>
+}
+
+@code {
+    private List<int> _items = new List<int>();
+
+    private int _count;
+
+    private void Increment()
+    {
+        _count++;
+        _items.Add(_count);
+    }
+}

@@ -1,0 +1,21 @@
+﻿@if(Personne is not null)
+{
+    <div class="personne" @onclick="OnSelect">
+        <p>Id : @Personne.Id</p>
+        <p>Nom : @Personne.Nom</p>
+        <p>Prénom : @Personne.Prenom</p>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public Personne? Personne { get; set; }
+
+    [Parameter]
+    public EventCallback<Personne> OnPersonneSelect { get; set; }
+
+    public void OnSelect()
+    {
+        OnPersonneSelect.InvokeAsync(Personne);
+    }
+}
